@@ -1,28 +1,30 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 from fetcher import fetch_jobs_from_sources
 from auto_submitter import JobAutoSubmitter
 
 print("=== Melody's Autonomous Job Hunter Agent ===")
-print("Email: melodymiller828@gmail.com | Telegram: @Melody0x_8\n---")
+print(f"Email: {os.environ.get('EMAIL')} | Telegram: {os.environ.get('TELEGRAM_HANDLE')}\n---")
 
 raw_jobs = fetch_jobs_from_sources()
 print(f"\n[*] 成功从多源获取 {len(raw_jobs)} 个岗位，开始执行红队高标准质检与每日 50+ 投递流水线...\n")
 
 submitter = JobAutoSubmitter(headless=True)
 applicant_info = {
-    "full_name": "Melody Qiu",
-    "email": "melodymiller828@gmail.com",
-    "telegram": "@Melody0x_8"
+    "full_name": os.environ.get("FULL_NAME"),
+    "email": os.environ.get("EMAIL"),
+    "telegram": os.environ.get("TELEGRAM_HANDLE")
 }
 
 # 真实母简历路径转换（WSL 兼容路径）
-resume_path = "/mnt/c/Users/LG-NB/Desktop/AI项目/AI -Melody.pdf"
+resume_path = os.environ.get("RESUME_PDF_PATH", "data/base_resume.pdf")
 if not os.path.exists(resume_path):
     # 如果路径未直接挂载，创建一个本地软链或备用文件保障流水线运转
-    resume_path = "AI -Melody.pdf"
+    resume_path = "data/base_resume.pdf"
     if not os.path.exists(resume_path):
         with open(resume_path, "w", encoding="utf-8") as rf:
-            rf.write("Melody Qiu - Master Resume Content")
+            rf.write(f"{os.environ.get('FULL_NAME', 'Candidate')} - Master Resume Content")
 
 success_count = 0
 target_submit_count = 50
@@ -48,9 +50,9 @@ for job in raw_jobs:
         
         job_url = job.get("url", "https://news.ycombinator.com/jobs")
         submitter.submit_application(job_url, applicant_info, resume_path)
-        print(f"-> [Telegram 通知已模拟发送至 @Melody0x_8]: 已成功向 {company} 投递岗位。")
+        print(f"-> [Telegram 通知已模拟发送至 {os.environ.get('TELEGRAM_HANDLE')}]: 已成功向 {company} 投递岗位。")
     else:
         pass # 低分自动静默拦截
 
 print(f"\n[*] 今日流水线运行完毕！共成功筛选并完成 {success_count} 个高质量岗位的自动化投递。")
-print("[*] 后续若收到公司 Gmail 回复，将实时通过 Telegram (@Melody0x_8) 推送给您。")
+print(f"[*] 后续若收到公司 Gmail 回复，将实时通过 Telegram ({os.environ.get('TELEGRAM_HANDLE')}) 推送给您。")

@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 from database import JobHunterDatabase
 from tailor import ResumeTailor
 from notifier import NotificationEngine
@@ -6,10 +8,10 @@ from notifier import NotificationEngine
 def run_production_pipeline():
     print("=== Melody's Production Job Hunter Pipeline ===")
     db = JobHunterDatabase()
-    tailor = ResumeTailor("/mnt/c/Users/LG-NB/Desktop/AI项目/AI -Melody.pdf")
+    tailor = ResumeTailor(os.environ.get("RESUME_PDF_PATH", "data/base_resume.pdf"))
     
     # 绑定您的真实 Telegram 目标账号
-    notifier = NotificationEngine(tg_token="", tg_chat_id="@Melody0x_8")
+    notifier = NotificationEngine(tg_token=os.environ.get("TELEGRAM_BOT_TOKEN", ""), tg_chat_id=os.environ.get("TELEGRAM_HANDLE"))
     
     target_submit_count = 50
     success_count = 0
@@ -35,7 +37,7 @@ def run_production_pipeline():
             
             print(f"[{success_count}/{target_submit_count}] 🟢 成功投递 | 公司: {company} | 岗位: {title}")
             
-            alert_msg = f"🚀 *岗位投递成功通知*\n*公司*: {company}\n*岗位*: {title}\n*邮箱*: melodymiller828@gmail.com"
+            alert_msg = f"🚀 *岗位投递成功通知*\n*公司*: {company}\n*岗位*: {title}\n*邮箱*: {os.environ.get('EMAIL')}"
             notifier.send_telegram_alert(alert_msg)
 
     print(f"\n[*] 生产级流水线运行完毕。今日累计精准投递: {success_count} 个岗位。")

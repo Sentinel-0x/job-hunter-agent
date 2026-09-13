@@ -1,0 +1,25 @@
+# --- 核心安全禁区 ---
+.env
+
+# --- Python 工程化 ---
+venv/
+__pycache__/
+.pytest_cache/
+
+# --- Agent 运行时数据 ---
+agent_state.db
+*.log
+job_hunter_state.db
+
+# --- 个人信息与临时文件 ---
+tailored_resume.pdf
+data/base_resume.md
+*.pdf
+models/
+
+# --- IDE 配置 ---
+.vscode/
+.idea/
+
+# --- 临时脚本 ---
+fix_*.py

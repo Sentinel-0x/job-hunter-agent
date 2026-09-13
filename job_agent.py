@@ -1,43 +1,21 @@
-BASE_RESUME = """
-Melody Qiu
-AI Research & Technology Intelligence Analyst | LLM Applications & Product Strategy
-Email: melody7448@outlook.com
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-[PROFESSIONAL SUMMARY]
-5+ years of cross-industry global tech intelligence & commercial strategy research experience, with 3 years of hands-on LLM and AI product evaluation practice. Specialize in designing production-grade ReAct Agent architectures with dynamic execution security (AST inspection, container sandboxing), building automated intelligence pipelines, and horizontal LLM evaluations.
+def _load_base_resume():
+    resume_path = os.path.join(os.path.dirname(__file__), "data", "base_resume.md")
+    if os.path.exists(resume_path):
+        with open(resume_path, "r", encoding="utf-8") as f:
+            return f.read()
+    return f"{os.environ.get('FULL_NAME', 'Candidate')} | Resume data not found, please add data/base_resume.md"
 
-[CORE SKILLS]
-- AI Ecosystem & Commercial Strategy: Global Tech Trend Tracking, AI Product Competitive Analysis, Partner Ecosystem Growth, GTM Strategy.
-- AI Solution Architecture & Client Success: Enterprise AI Implementation, Agentic Workflow Design, RAG Solution Mapping, Multi-Model Evaluation.
-- Technical Stack: OpenAI API, Claude API, DeepSeek API, Dify, Coze, n8n, OpenClaw, Python, SQLite, Docker, Telegram.
+BASE_RESUME = _load_base_resume()
 
-[PROFESSIONAL EXPERIENCE]
-1. LBank Exchange | Business Development Specialist (Jun 2025-Mar 2026)
-   - Engineered an automated intelligence pipeline (OpenAI API, OpenClaw, Telegram) to track global Web3/AI dynamics, cutting manual screening workload by 60%.
-   - Built and managed a pipeline of 40+ potential listing projects across DeFi, GameFi, and AI/Infrastructure sectors.
-   - Conducted due diligence on project fundamentals, tokenomics, technical architecture, and on-chain traction.
-
-2. Shenzhen Lixin Technology Trading Co., Ltd | Social Media Marketing Lead & Overseas Marketing Specialist (Jul 2021-Sep 2023)
-   - Grew a North America Amazon store to $100K monthly sales, improved product ranking from #200 to Top 40.
-   - Managed 200+ KOL relationships, generated 107+ marketing leads with a 4:1 ROI.
-
-[INDEPENDENT AI RESEARCH PROJECT]
-Frontier LLM Research & AI Workflow Evaluation (2025-Present)
-- Production-Grade ReAct Architecture: Designed and deployed a resilient ReAct agent engine featuring automated self-healing retry logic.
-- Static AST Security Barrier: Engineered a pre-runtime security gate using Python AST inspection to block unauthorized system imports.
-- Dual-Sandbox Isolation Execution: Built fault-tolerant execution prioritizing network-disabled Docker and restricted subprocess sandbox.
-- State Resilience & Persistence: Integrated SQLite session checkpointing for long-running agentic workflows.
-
-[EDUCATION]
-- Bachelor's in Business Administration, Shenzhen University (2021-2024)
-- Associate's in Business English, Jiangxi Biotechnology Vocational College (2016-2019)
-"""
 
 
 import json
 import logging
 import sqlite3
-import os
 from typing import Dict, Any, Optional, Callable, List
 from openai import OpenAI
 
