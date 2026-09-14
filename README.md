@@ -15,7 +15,77 @@
     <a href="https://github.com/Sentinel-0x/job-hunter-agent/issues/new?labels=bug">Report Bug</a>
     ·
     <a href="https://github.com/Sentinel-0x/job-hunter-agent/issues/new?labels=enhancement">Request Feature</a>
+<a id="readme-top"></a>
+
+[![License][license-shield]][license-url]
+[![Python][Python-badge]][Python-url]
+[![OpenAI][OpenAI-badge]][OpenAI-url]
+[![SQLite][SQLite-badge]][SQLite-url]
+
+<br />
+<div align="center">
+  <h3 align="center">🎯 Job Hunter Agent</h3>
+
+  <p align="center">
+    An automated job-application pipeline — red-team JD scoring, anti-hallucination resume tailoring, and SQLite-tracked submission history.
+    <br />
+    <a href="https://github.com/Sentinel-0x/job-hunter-agent"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/Sentinel-0x/job-hunter-agent/issues/new?labels=bug">Report Bug</a>
+    ·
+    <a href="https://github.com/Sentinel-0x/job-hunter-agent/issues/new?labels=enhancement">Request Feature</a>
   </p>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a>
+      <ul><li><a href="#built-with">Built With</a></li></ul>
+    </li>
+    <li><a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
+## About The Project
+
+Manually screening job postings and tailoring a resume for each one doesn't scale. This project automates the pipeline end to end: it evaluates a job description against a candidate's real background using a strict "red-team" LLM reviewer, tailors the resume **only** using facts that already exist in the master resume (no fabricated experience), tracks every decision in SQLite, and pushes submission results to Telegram.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Built With
+
+* [![Python][Python-badge]][Python-url]
+* [![OpenAI][OpenAI-badge]][OpenAI-url]
+* [![SQLite][SQLite-badge]][SQLite-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Getting Started
+
+### Prerequisites
+
+* Python 3.10 or higher
+* OpenAI API Key (or compatible LLM provider)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/Sentinel-0x/job-hunter-agent.git](https://github.com/Sentinel-0x/job-hunter-agent.git)
+   cd job-hunter-agent  </p>
 </div>
 
 <details>
