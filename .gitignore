@@ -28,3 +28,12 @@ fix_*.py
 # --- job-hunter-agent 运行时数据 ---
 data/job_hunter.db
 data/screenshots/
+
+# runtime files and local snapshots
+*.log
+*.db
+*.db-shm
+*.db-wal
+junit/
+__pycache__/
+*.pyc
